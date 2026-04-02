@@ -21,7 +21,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             if [ ! -d ~/nginx-global-docker ]; then
-              git clone git@github.com:${{ github.repository }}.git ~/nginx-global-docker
+              git clone git@github-nginxglobaldocker:${{ github.repository }}.git ~/nginx-global-docker
             else
               cd ~/nginx-global-docker && git pull origin main
             fi
