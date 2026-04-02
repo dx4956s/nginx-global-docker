@@ -1,0 +1,19 @@
+services:
+  nginx:
+    image: jonasal/nginx-certbot:latest
+    restart: unless-stopped
+    environment:
+      CERTBOT_EMAIL: ${CERTBOT_EMAIL}
+      RESUMEFORGEDOMAIN: ${RESUMEFORGEDOMAIN}
+      RESUMEFORGEPORT: ${RESUMEFORGEPORT}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/user_conf.d:ro
+      - letsencrypt:/etc/letsencrypt
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  letsencrypt:
