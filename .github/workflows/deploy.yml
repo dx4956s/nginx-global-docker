@@ -27,11 +27,15 @@ jobs:
             fi
             cd ~/nginx-global-docker
 
+            HOST_IP=$(hostname -I | awk '{print $1}')
+
             cat > .env <<EOF
             CERTBOT_EMAIL=${{ secrets.CERTBOT_EMAIL }}
             RESUMEFORGEDOMAIN=${{ secrets.RESUMEFORGEDOMAIN }}
             RESUMEFORGEPORT=${{ secrets.RESUMEFORGEPORT }}
             EOF
+
+            sed -i "s|host.docker.internal:.*\"|host.docker.internal:${HOST_IP}\"|" docker-compose.yml
 
             set -a && source .env && set +a
             VARS=$(grep -v '^#' .env | grep -v '^$' | cut -d= -f1 | sed 's/^/\${/' | sed 's/$/}/' | tr '\n' ' ')

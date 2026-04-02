@@ -6,10 +6,14 @@ services:
       CERTBOT_EMAIL: ${CERTBOT_EMAIL}
       RESUMEFORGEDOMAIN: ${RESUMEFORGEDOMAIN}
       RESUMEFORGEPORT: ${RESUMEFORGEPORT}
-    network_mode: host
+    ports:
+      - "80:80"
+      - "443:443"
     volumes:
       - ./nginx:/etc/nginx/user_conf.d:ro
       - letsencrypt:/etc/letsencrypt
+    extra_hosts:
+      - "host.docker.internal:172.31.21.29"
 
 volumes:
   letsencrypt:

@@ -32,12 +32,12 @@ server {
     add_header Referrer-Policy           "strict-origin-when-cross-origin" always;
 
     location /_next/static/ {
-        proxy_pass http://localhost:${RESUMEFORGEPORT};
+        proxy_pass http://host.docker.internal:${RESUMEFORGEPORT};
         add_header Cache-Control "public, max-age=31536000, immutable";
     }
 
     location / {
-        proxy_pass         http://localhost:${RESUMEFORGEPORT};
+        proxy_pass         http://host.docker.internal:${RESUMEFORGEPORT};
         proxy_http_version 1.1;
         proxy_set_header   Upgrade    $http_upgrade;
         proxy_set_header   Connection "upgrade";
