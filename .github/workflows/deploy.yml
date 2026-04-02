@@ -18,9 +18,9 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ${{ secrets.DEPLOY_PATH }}
+            cd ~/nginx-proxy
             git pull origin main
 
             cat > .env <<EOF
