@@ -33,5 +33,10 @@ jobs:
             RESUMEFORGEPORT=${{ secrets.RESUMEFORGEPORT }}
             EOF
 
+            set -a && source .env && set +a
+            for f in nginx/*.conf.template; do
+              envsubst < "$f" > "${f%.template}"
+            done
+
             docker compose pull
             docker compose up -d
