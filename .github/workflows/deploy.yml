@@ -20,12 +20,12 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            if [ ! -d ~/nginx-global-docker ]; then
-              git clone git@github-nginxglobaldocker:${{ github.repository }}.git ~/nginx-global-docker
+            if [ ! -d "$HOME/nginx-global-docker" ]; then
+              git clone git@github-nginxglobaldocker:${{ github.repository }}.git "$HOME/nginx-global-docker"
             else
-              cd ~/nginx-global-docker && git pull origin main
+              cd "$HOME/nginx-global-docker" && git pull origin main
             fi
-            cd ~/nginx-global-docker
+            cd "$HOME/nginx-global-docker"
 
             HOST_IP=$(hostname -I | awk '{print $1}')
 
